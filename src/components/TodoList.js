@@ -7,7 +7,8 @@ const TodoList = observer(() => {
   return (
     <div className={styles.todolist}>
       <h1>Список задач: </h1>
-      {TodoRed.todo.map((el) => {
+
+      {TodoRed.todo.mainTodos.map((el) => {
         return <Todo text={el} />
       })}
     </div>

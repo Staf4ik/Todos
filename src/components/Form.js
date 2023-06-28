@@ -17,13 +17,17 @@ const Form = observer(() => {
           onChange={(event) => {
             console.log(`value: ${Input.inputValue}`)
             // console.log(event.currentTarget.value)
+
             return Input.inputChange(event.currentTarget.value)
           }}
         ></input>
         <button
           className={styles.form__button}
           type="submit"
-          onClick={() => TodoRed.addTodo(Input.inputValue)}
+          onClick={() => {
+            TodoRed.addTodo(Input.inputValue)
+            Input.inputChange('')
+          }}
         >
           {' '}
           Добавить задачу{' '}

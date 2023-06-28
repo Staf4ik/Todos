@@ -1,21 +1,25 @@
 import { makeAutoObservable, makeObservable } from 'mobx'
 
 class TodoRed {
-  todo = [1]
+  todo = {
+    todos: {},
+    mainTodos: [],
+    parrentId: null,
+  }
 
   constructor() {
     makeAutoObservable(this)
   }
 
   addTodo(text) {
-    this.todo = [...this.todo, text]
+    this.todo.mainTodos = [...this.todo.mainTodos, text]
     console.log('задача добавлена')
   }
 
   delSelectedTodo() {}
 
   delAllTodos() {
-    this.todo = []
+    this.todo.mainTodos = []
   }
 }
 

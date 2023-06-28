@@ -12,7 +12,6 @@
 }
 
 .form__input:focus {
-    /* border: 5px solid #d7b5b5; */
     outline-color: #be9797;
 }
 
