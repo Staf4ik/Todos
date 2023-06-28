@@ -1,13 +1,14 @@
 import TodoRed from '../store/todo'
+import styles from './Buttons.module.css'
 
 const Buttons = () => {
   return (
     <>
-      <button onClick={() => TodoRed.delAllTodos()}>
+      <button className={styles.button} onClick={() => TodoRed.delAllTodos()}>
         {' '}
         Удалить все задачи{' '}
       </button>
-      <button onClick={() => TodoRed.delSelectedTodo}>
+      <button className={styles.button} onClick={() => TodoRed.delSelectedTodo}>
         {' '}
         Удалить выбранную задачу
       </button>

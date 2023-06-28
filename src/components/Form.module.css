@@ -1,0 +1,27 @@
+.form{
+    /* margin: 20px; */
+    /* padding: 20px; */
+}
+
+.form__input {
+    margin: 20px;
+    padding: 10px;
+    border-radius: 10px ;
+    border: 1px solid #d7b5b5;
+    width: 300px;
+}
+
+.form__input:focus {
+    /* border: 5px solid #d7b5b5; */
+    outline-color: #be9797;
+}
+
+.form__button {
+    padding: 10px;
+    border-radius: 10px ;
+    border: 1px solid #d7b5b5;
+}
+
+.form__button:hover {
+    background-color: #be9797;
+}

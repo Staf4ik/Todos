@@ -1,11 +1,11 @@
 import TodoRed from '../store/todo'
-// import TodoList from './TodoList'
+import styles from './Todo.module.css'
 
 const Todo = ({ text }) => {
   return (
-    <>
+    <div className={styles.todo}>
       <p>{text}</p>
-    </>
+    </div>
   )
 }
 
