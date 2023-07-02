@@ -15,7 +15,7 @@ const Form = observer(() => {
           placeholder="enter the text"
           value={Input.inputValue}
           onChange={(event) => {
-            console.log(`value: ${Input.inputValue}`)
+            // console.log(`value: ${Input.inputValue}`)
             // console.log(event.currentTarget.value)
 
             return Input.inputChange(event.currentTarget.value)
@@ -25,7 +25,8 @@ const Form = observer(() => {
           className={styles.form__button}
           type="submit"
           onClick={() => {
-            TodoRed.addTodo(Input.inputValue)
+            const id = new Date().getTime().toString()
+            TodoRed.addTodo(Input.inputValue, id)
             Input.inputChange('')
           }}
         >

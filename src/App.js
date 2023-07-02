@@ -7,8 +7,6 @@ import TodoRed from './store/todo.js'
 import { observer } from 'mobx-react-lite'
 
 const App = () => {
-  // console.log(' Задачи: ' + TodoRed.todo)
-  console.log(' хуй пойми че твориться ')
   return (
     <div className="App">
       {/* ненужная штука, с нее начиналась программа, это тупо счетчик */}

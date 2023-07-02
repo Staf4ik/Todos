@@ -5,7 +5,7 @@
     border-radius: 10px;
     background-color: #f3e4e4;
     width: 400px;
-    box-shadow: 5px 5px 10px ;
+    box-shadow: 5px 5px 10px black;
     
 }
 
@@ -15,5 +15,24 @@
     /* outline-color: black; */
 }
 
+.todo_sel {
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #4e524d ;
+    border-radius: 10px;
+    background-color: #4e524d;
+    width: 400px;
+    box-shadow: 5px 5px 10px black;
+    color: #fff;
+    
+    
+}
+
+.todo_sel:hover {
+    border: 1px solid #be9797;
+    background-color: white;
+    color: black;
+    /* outline-color: black; */
+}
 
 
