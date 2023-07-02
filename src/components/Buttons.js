@@ -8,7 +8,10 @@ const Buttons = () => {
         {' '}
         Удалить все задачи{' '}
       </button>
-      <button className={styles.button} onClick={() => TodoRed.delSelectedTodo}>
+      <button
+        className={styles.button}
+        onClick={() => TodoRed.delSelectedTodo()}
+      >
         {' '}
         Удалить выбранную задачу
       </button>

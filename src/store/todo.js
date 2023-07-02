@@ -28,7 +28,19 @@ class TodoRed {
     }
   }
 
-  delSelectedTodo() {}
+  delSelectedTodo() {
+    console.log(`main: ${this.todo.mainTodos}`)
+    console.log(this.todo.todos)
+
+    this.todo.mainTodos = Object.keys(this.todo.todos)
+      .filter((id) => this.todo.todos[id].selected === false)
+      .map((el) => ({
+        id: el,
+        text: this.todo.todos[el].text,
+        selected: false,
+        parentId: null,
+      }))
+  }
 
   delAllTodos() {
     this.todo.mainTodos = []
