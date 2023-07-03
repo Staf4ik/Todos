@@ -7,7 +7,7 @@ class TodoRed {
   // mainTodo - массив из которого формируются родительские задачи
   // parentID - для станлартного значени для родителей
   todo = {
-    todos: { a: 1 },
+    todos: {},
     mainTodos: [],
     parrentId: null,
   }
@@ -23,15 +23,23 @@ class TodoRed {
     ]
     this.todo.todos = {
       ...this.todo.todos,
-      [id]: { id: [id], text: [text], selected: false },
-      // console.log(this.todo.todos[id].text)
+      [id]: { id: [id], text: [text], selected: false, parentId: null },
     }
   }
 
-  delSelectedTodo() {
-    console.log(`main: ${this.todo.mainTodos}`)
+  addChildTodo(id, text, parId) {
+    this.todo.todos = {
+      ...this.todo.todos,
+      [id]: { id: [id], text: [text], selected: false, parentId: [parId] },
+    }
     console.log(this.todo.todos)
+  }
 
+  selectTodo(idSel) {
+    this.todo.todos[idSel].selected = !this.todo.todos[idSel].selected
+  }
+
+  delSelectedTodo() {
     this.todo.mainTodos = Object.keys(this.todo.todos)
       .filter((id) => this.todo.todos[id].selected === false)
       .map((el) => ({
@@ -44,20 +52,6 @@ class TodoRed {
 
   delAllTodos() {
     this.todo.mainTodos = []
-  }
-
-  // selectTodo(id) {
-  //   const changeMainTodos = this.todo.mainTodos.map((el) => {
-  //     if ((el.id = id)) {
-  //       el.selected = !el.selected
-  //     }
-  //     return el
-  //   })
-
-  //   // this.todo.mainTodos = changeMainTodos
-  // }
-  selectTodo(idSel) {
-    this.todo.todos[idSel].selected = !this.todo.todos[idSel].selected
   }
 }
 

@@ -5,17 +5,18 @@ import Form from './components/Form.js'
 import TodoList from './components/TodoList'
 import TodoRed from './store/todo.js'
 import { observer } from 'mobx-react-lite'
+// import { RiArrowDownFill } from 'react-icons/ri'
 
-const App = () => {
+const App = observer(() => {
   return (
     <div className="App">
       {/* ненужная штука, с нее начиналась программа, это тупо счетчик */}
       {/* <Counter /> */}
       <Form />
       <Buttons />
-      <TodoList />
+      <TodoList todoIds={TodoRed.todo.mainTodos} />
     </div>
   )
-}
+})
 
 export default App
