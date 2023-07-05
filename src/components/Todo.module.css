@@ -1,4 +1,7 @@
 .todo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 10px auto;
     padding: 10px;
     /* border: 1px solid #d7b5b5 ; */
@@ -16,6 +19,9 @@
 }
 
 .todo_sel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 10px auto;
     padding: 10px;
     border: 1px solid #4e524d ;
@@ -33,6 +39,10 @@
     background-color: white;
     color: black;
     /* outline-color: black; */
+}
+
+.todoIcon {
+    font-size: 2rem;
 }
 
 

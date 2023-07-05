@@ -3,7 +3,7 @@ import TodoRed from '../store/todo'
 import styles from './Todo.module.css'
 import TodoList from './TodoList'
 
-// import { AiOutlinePlus } from 'react-icons/ai'
+import { AiOutlinePlus } from 'react-icons/ai'
 
 const Todo = observer(({ prop, id }) => {
   // console.log(typeof prop.id)
@@ -25,25 +25,28 @@ const Todo = observer(({ prop, id }) => {
         }
         onClick={() => TodoRed.selectTodo([prop])}
       >
-        <p>{TodoRed.todo.todos[prop].text}</p>
-        {/* отображение id задачи */}
-        <p>id: {id}</p>
-        <p>parent ID : {TodoRed.todo.todos[prop].parId}</p>
-        {/* тест на отображение изменения состояния selected  */}
-        {/* <p> {TodoRed.todo.todos[id].selected ? 1 : 2}</p> */}
-        {/* <AiOutlinePlus /> */}
-        <button
-          onClick={(event) => {
-            event.stopPropagation()
-            const id = new Date().getTime().toString()
-            const text = prompt()
-            const parId = prop
-            console.log(parId)
-            TodoRed.addChildTodo(id, text, parId)
-          }}
-        >
-          +
-        </button>
+        <div>
+          <p>{TodoRed.todo.todos[prop].text}</p>
+          {/* отображение id задачи */}
+          <p>id: {id}</p>
+          <p>parent ID : {TodoRed.todo.todos[prop].parId}</p>
+          {/* тест на отображение изменения состояния selected  */}
+          {/* <p> {TodoRed.todo.todos[id].selected ? 1 : 2}</p> */}
+        </div>
+
+        <div>
+          <AiOutlinePlus
+            className={styles.todoIcon}
+            onClick={(event) => {
+              event.stopPropagation()
+              const id = new Date().getTime().toString()
+              const text = prompt()
+              const parId = prop
+              console.log(parId)
+              TodoRed.addChildTodo(id, text, parId)
+            }}
+          />
+        </div>
       </div>
       {/* <TodoList todoIds={}/> */}
     </div>
