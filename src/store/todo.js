@@ -16,38 +16,62 @@ class TodoRed {
     makeAutoObservable(this)
   }
 
+  // это вроде неверное добавление элементов в массив, при помощи копирование всего массива
+  // addTodo(text, id) {
+  //   this.todo.mainTodos = [
+  //     ...this.todo.mainTodos,
+  //     { id: [id], text: [text], selected: false, parentId: null },
+  //   ]
+  //   this.todo.todos = {
+  //     ...this.todo.todos,
+  //     [id]: { id: [id], text: [text], selected: false, parentId: null },
+  //   }
+  // }
+
+  // // правильный синтаксис, с добавлением через пуш, а не копирование объекта
   addTodo(text, id) {
-    this.todo.mainTodos = [
-      ...this.todo.mainTodos,
-      { id: [id], text: [text], selected: false, parentId: null },
-    ]
-    this.todo.todos = {
-      ...this.todo.todos,
-      [id]: { id: [id], text: [text], selected: false, parentId: null },
+    console.log(this.todo.todos)
+    this.todo.mainTodos.push(id)
+
+    this.todo.todos[id] = {
+      id: [id],
+      text: [text],
+      selected: false,
+      parentId: null,
     }
   }
 
   addChildTodo(id, text, parId) {
-    this.todo.todos = {
-      ...this.todo.todos,
-      [id]: { id: [id], text: [text], selected: false, parentId: [parId] },
+    this.todo.todos[id] = {
+      id: [id],
+      text: [text],
+      selected: false,
+      parentId: [parId],
     }
-    console.log(this.todo.todos)
   }
+  // синтакси не соответствующий mobx
+  // addChildTodo(id, text, parId) {
+  //   this.todo.todos = {
+  //     ...this.todo.todos,
+  //     [id]: { id: [id], text: [text], selected: false, parentId: [parId] },
+  //   }
+  //   console.log(this.todo.todos)
+  // }
 
   selectTodo(idSel) {
     this.todo.todos[idSel].selected = !this.todo.todos[idSel].selected
   }
 
   delSelectedTodo() {
-    this.todo.mainTodos = Object.keys(this.todo.todos)
-      .filter((id) => this.todo.todos[id].selected === false)
-      .map((el) => ({
-        id: el,
-        text: this.todo.todos[el].text,
-        selected: false,
-        parentId: null,
-      }))
+    this.todo.mainTodos = Object.keys(this.todo.todos).filter(
+      (id) => this.todo.todos[id].selected === false
+    )
+    // .map((el) => ({
+    //   id: el,
+    //   text: this.todo.todos[el].text,
+    //   selected: false,
+    //   parentId: null,
+    // }))
   }
 
   delAllTodos() {

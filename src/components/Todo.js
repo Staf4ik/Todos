@@ -5,34 +5,39 @@ import TodoList from './TodoList'
 
 // import { AiOutlinePlus } from 'react-icons/ai'
 
-const Todo = ({ prop, id }) => {
-  // console.log(prop.id)
+const Todo = observer(({ prop, id }) => {
+  // console.log(typeof prop.id)
+  // const actualArray = Array.from(prop.id)
+  // console.log(typeof actualArray[0])
   // console.log(TodoRed.todo.todos[prop.id].parentId)
-  const subTodo = Object.keys(TodoRed.todo.todos).filter((el) => {
-    return TodoRed.todo.todos[el].parentId === prop.id
-  })
+  const x = Object.keys(TodoRed.todo.todos)
+  // const subTodo = Object.keys(TodoRed.todo.todos).filter((el) => {
+  //   return TodoRed.todo.todos[el].parentId === actualArray[0]
+  // })
 
-  console.log(subTodo)
-
+  // console.log(subTodo)
+  console.log(x)
   return (
     <div>
       <div
         className={
           TodoRed.todo.todos[id].selected ? styles.todo_sel : styles.todo
         }
-        onClick={() => TodoRed.selectTodo([id])}
+        onClick={() => TodoRed.selectTodo([prop])}
       >
-        <p>{prop.text}</p>
+        <p>{TodoRed.todo.todos[prop].text}</p>
         {/* отображение id задачи */}
         <p>id: {id}</p>
+        <p>parent ID : {TodoRed.todo.todos[prop].parId}</p>
         {/* тест на отображение изменения состояния selected  */}
         {/* <p> {TodoRed.todo.todos[id].selected ? 1 : 2}</p> */}
         {/* <AiOutlinePlus /> */}
         <button
           onClick={(event) => {
+            event.stopPropagation()
             const id = new Date().getTime().toString()
             const text = prompt()
-            const parId = prop.id
+            const parId = prop
             console.log(parId)
             TodoRed.addChildTodo(id, text, parId)
           }}
@@ -43,6 +48,6 @@ const Todo = ({ prop, id }) => {
       {/* <TodoList todoIds={}/> */}
     </div>
   )
-}
+})
 
 export default Todo

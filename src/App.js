@@ -8,6 +8,8 @@ import { observer } from 'mobx-react-lite'
 // import { RiArrowDownFill } from 'react-icons/ri'
 
 const App = observer(() => {
+  console.dir(TodoRed.todo.todos)
+
   return (
     <div className="App">
       {/* ненужная штука, с нее начиналась программа, это тупо счетчик */}

@@ -10,7 +10,7 @@ const TodoList = observer((props) => {
       <h1>Список задач: </h1>
 
       {todoIds.map((el) => {
-        return <Todo prop={el} id={el.id} key={el.id} />
+        return <Todo prop={el} id={el} key={el} />
       })}
     </div>
   )
