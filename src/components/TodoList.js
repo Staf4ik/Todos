@@ -7,8 +7,6 @@ const TodoList = observer((props) => {
   const { todoIds } = props
   return (
     <div className={styles.todolist}>
-      <h1>Список задач: </h1>
-
       {todoIds.map((el) => {
         return <Todo prop={el} id={el} key={el} />
       })}

@@ -19,7 +19,7 @@ class TodoRed {
   addTodo(text, id) {
     // Добавление задачи в массиы чисел mainTodos из которого формируется список главных задач.
     // каждый елемент массива равен id задачи
-    console.log(this.todo.todos)
+
     this.todo.mainTodos.push(id)
 
     // При добавлении новой задачи в объекте todos создается новое свойство c именем равным id
@@ -32,7 +32,7 @@ class TodoRed {
       id: [id],
       text: [text],
       selected: false,
-      parentId: null,
+      parentId: 0,
     }
   }
 

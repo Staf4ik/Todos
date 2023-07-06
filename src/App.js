@@ -16,6 +16,7 @@ const App = observer(() => {
       {/* <Counter /> */}
       <Form />
       <Buttons />
+      <h1>Список задач: </h1>
       <TodoList todoIds={TodoRed.todo.mainTodos} />
     </div>
   )
