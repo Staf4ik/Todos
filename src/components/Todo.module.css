@@ -45,4 +45,12 @@
     font-size: 2rem;
 }
 
+.subTodoSecond {
+    margin-left: 100px; 
+}
+
+.subTodoFirst {
+    margin-left: -100px; 
+}
+
 

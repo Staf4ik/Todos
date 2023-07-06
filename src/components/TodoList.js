@@ -6,10 +6,12 @@ import styles from './TodoList.module.css'
 const TodoList = observer((props) => {
   const { todoIds } = props
   return (
-    <div className={styles.todolist}>
-      {todoIds.map((el) => {
-        return <Todo prop={el} id={el} key={el} />
-      })}
+    <div>
+      <div className={styles.todolist}>
+        {todoIds.map((el) => {
+          return <Todo prop={el} id={el} key={el} />
+        })}
+      </div>
     </div>
   )
 })
