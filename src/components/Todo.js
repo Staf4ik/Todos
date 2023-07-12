@@ -13,61 +13,79 @@ const Todo = observer(({ prop, id }) => {
   // компоненте TodoList через пропсы , как значение свойства  todoIds
 
   // !!!!! СТОИТ ОБРАТИТЬ ВНИМАНИЕ !!!!
-  // mobx возвращает значения как елемент массива proxy объекта
+  // mobx возвращает значения как элемент массива proxy объекта
   // из-за этого TodoRed.todo.todos[el].parentId === prop будет неверно.
   // т.к. typeof TodoRed.todo.todos[el].parentId = object.
   // чтобы получить значение из proxy объекта, нужно воспользоваться
   // следующим методом: Array.from . Он вернет массив с одним элементом. Чтобы получить
   // значение из массива, мы имеем следующую запись : Array.from(TodoRed.todo.todos[el].parentId)[0]
 
-  const subTodo = Object.keys(TodoRed.todo.todos).filter((el) => {
-    return Array.from(TodoRed.todo.todos[el].parentId)[0] === prop
-  })
+  const subTodo1 = () =>
+    Object.keys(TodoRed.todo.todos).filter((el) => {
+      return Array.from(TodoRed.todo.todos[el].parentId)[0] === prop
+    })
+
+  const subTodo = subTodo1()
 
   const parentTodo = TodoRed.todo.todos[prop].parentId
-  console.log(parentTodo)
+  // console.log(parentTodo)
 
-  console.log(subTodo)
-
+  // console.log(subTodo)
   return (
-    <div className={parentTodo ? styles.subTodoSecond : styles.subTodoFirst}>
-      <div
-        className={
-          TodoRed.todo.todos[id].selected ? styles.todo_sel : styles.todo
-        }
-        onClick={() => TodoRed.selectTodo([prop])}
-      >
-        <div>
-          <p>{TodoRed.todo.todos[prop].text}</p>
-          {/* отображение id задачи  */}
-          <p>id: {id}</p>
-          {/* отображение parentid задачи для проверки  */}
-          <p>
-            parent ID :
-            {TodoRed.todo.todos[prop].parentId === 0
-              ? 'null'
-              : TodoRed.todo.todos[prop].parentId}
-          </p>
-          {/* тест на отображение изменения состояния selected  */}
-          {/* пока selected = false отображается 1 при true 2  */}
-          {/* <p> {TodoRed.todo.todos[id].selected ? 2 : 1}</p> */}
+    <>
+      <div className={parentTodo ? styles.subTodoSecond : styles.subTodoFirst}>
+        <div className={styles.display}>
+          <div
+            className={
+              TodoRed.todo.todos[id].selected ? styles.todo_sel : styles.todo
+            }
+            // onClick={() =>
+            //   console.log(
+            //     Object.keys(TodoRed.todo.todos).filter(
+            //       (el) =>
+            //         Array.from(TodoRed.todo.todos[el].parentId)[0] === prop
+            //     )
+            //   )
+            // }
+            onClick={() => TodoRed.selectTodo(prop, subTodo)}
+          >
+            <div>
+              <p>{TodoRed.todo.todos[prop].text}</p>
+              {/* отображение id задачи  */}
+              <span>id: {id}</span>
+              {/* отображение parentid задачи для проверки  */}
+              <span>
+                parent ID :
+                {TodoRed.todo.todos[prop].parentId === 0
+                  ? 'null'
+                  : TodoRed.todo.todos[prop].parentId}
+              </span>
+              {/* тест на отображение изменения состояния selected  */}
+              {/* пока selected = false отображается 1 при true 2  */}
+              {/* <p> {TodoRed.todo.todos[id].selected ? 2 : 1}</p> */}
+            </div>
+
+            <div>
+              <AiOutlinePlus
+                className={styles.todoIcon}
+                onClick={(event) => {
+                  event.stopPropagation()
+                  const id = new Date().getTime().toString()
+                  const text = prompt()
+                  const parId = prop
+                  TodoRed.addChildTodo(id, text, parId)
+                }}
+              />
+            </div>
+          </div>
+          <div>
+            <input type="checkbox" className={styles.inputTodo}></input>
+          </div>
         </div>
 
-        <div>
-          <AiOutlinePlus
-            className={styles.todoIcon}
-            onClick={(event) => {
-              event.stopPropagation()
-              const id = new Date().getTime().toString()
-              const text = prompt()
-              const parId = prop
-              TodoRed.addChildTodo(id, text, parId)
-            }}
-          />
-        </div>
+        <TodoList todoIds={subTodo} />
       </div>
-      <TodoList todoIds={subTodo} />
-    </div>
+    </>
   )
 })
 

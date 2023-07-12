@@ -37,7 +37,7 @@ class TodoRed {
   }
 
   // При добавдении дочерней задачи, ее объект помещается только в todos. Не затрагивая mainTodos
-  // создается объект  аналогичный тем, что там хранятся, с одним отличием, что parentId = id той задачина на которой он был создан
+  // создается объект  аналогичный тем, что там хранятся, с одним отличием, что parentId = id той задачи на на которой он был создан
   addChildTodo(id, text, parId) {
     this.todo.todos[id] = {
       id: [id],
@@ -48,8 +48,14 @@ class TodoRed {
   }
 
   // При клике на объект значение его свойства selected меняется на противоположное
-  selectTodo(idSel) {
-    this.todo.todos[idSel].selected = !this.todo.todos[idSel].selected
+  selectTodo(idSel, subTodo) {
+    subTodo.push(idSel)
+    console.log(subTodo)
+
+    subTodo.forEach(
+      (key) =>
+        (this.todo.todos[key].selected = !this.todo.todos[idSel].selected)
+    )
   }
 
   delSelectedTodo() {

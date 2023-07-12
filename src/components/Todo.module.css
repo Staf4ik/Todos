@@ -1,3 +1,12 @@
+.display {
+    display: flex;
+    /* justify-content: center; */
+    margin: 0px auto;
+    width: 500px;
+    align-items: center;
+
+} 
+
 .todo {
     display: flex;
     justify-content: space-between;
@@ -50,7 +59,20 @@
 }
 
 .subTodoFirst {
+
     margin-left: -100px; 
+}
+
+span {
+    margin-left: 20px;
+}
+
+.inputTodo {
+    margin-left: 30px;
+    /* width: 150px; */
+    /* size: 150px; */
+    /* font-size: 150px;*/
+    transform: scale(2) 
 }
 
 
