@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite'
 import TodoRed from '../store/todo'
 import styles from './Todo.module.css'
 import TodoList from './TodoList'
+import findChildTodos from '../function/findChildTodos'
 
 import { AiOutlinePlus } from 'react-icons/ai'
 
@@ -20,12 +21,17 @@ const Todo = observer(({ prop, id }) => {
   // следующим методом: Array.from . Он вернет массив с одним элементом. Чтобы получить
   // значение из массива, мы имеем следующую запись : Array.from(TodoRed.todo.todos[el].parentId)[0]
 
-  const subTodo1 = () =>
-    Object.keys(TodoRed.todo.todos).filter((el) => {
-      return Array.from(TodoRed.todo.todos[el].parentId)[0] === prop
-    })
+  // const findChildTodos = (currentId) => {
+  //   return Object.keys(TodoRed.todo.todos).filter((el) => {
+  //     return Array.from(TodoRed.todo.todos[el].parentId)[0] === currentId
+  //   })
+  // }
 
-  const subTodo = subTodo1()
+  const subTodo = Object.keys(TodoRed.todo.todos).filter((el) => {
+    return Array.from(TodoRed.todo.todos[el].parentId)[0] === prop
+  })
+
+  const subTodo2 = findChildTodos(prop)
 
   const parentTodo = TodoRed.todo.todos[prop].parentId
   // console.log(parentTodo)
@@ -47,7 +53,8 @@ const Todo = observer(({ prop, id }) => {
             //     )
             //   )
             // }
-            onClick={() => TodoRed.selectTodo(prop, subTodo)}
+            onClick={() => TodoRed.selectTodo(prop, subTodo2)}
+            // onClick={() => findChildTodos(prop)}
           >
             <div>
               <p>{TodoRed.todo.todos[prop].text}</p>

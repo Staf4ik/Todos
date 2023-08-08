@@ -22,8 +22,8 @@
 }
 
 .todo:hover {
-    border: 1px solid #be9797;
-    background-color: white;
+    border: 1px solid yellow;
+    /* background-color: white; */
     /* outline-color: black; */
 }
 
@@ -44,9 +44,9 @@
 }
 
 .todo_sel:hover {
-    border: 1px solid #be9797;
-    background-color: white;
-    color: black;
+    border: 1px solid yellow;
+    /* background-color: white; */
+    /* color: black; */
     /* outline-color: black; */
 }
 

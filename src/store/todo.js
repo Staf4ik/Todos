@@ -1,4 +1,5 @@
 import { makeAutoObservable, makeObservable } from 'mobx'
+import findChildTodos from '../function/findChildTodos'
 
 class TodoRed {
   // изначальное состояние
@@ -48,34 +49,52 @@ class TodoRed {
   }
 
   // При клике на объект значение его свойства selected меняется на противоположное
-  selectTodo(idSel, subTodo) {
-    subTodo.push(idSel)
-    console.log(subTodo)
-
-    subTodo.forEach(
-      (key) =>
-        (this.todo.todos[key].selected = !this.todo.todos[idSel].selected)
-    )
+  selectTodo(idSel, subTodo2) {
+    console.log(subTodo2)
+    const oppositeState = !this.todo.todos[idSel].selected
+    subTodo2.forEach((key) => (this.todo.todos[key].selected = oppositeState))
   }
 
   delSelectedTodo() {
-    // при удалении выбранных задач, мы создаем массив из имен свойств todos , которые равны id.
-    // после этого фильтруем его на основании значения свойства selected = false у этих объектов и
-    // присваеваем значение этого выражения переменной mainTodos из которой формируется список основных
-    // (главных) задач
-    this.todo.mainTodos = Object.keys(this.todo.todos).filter(
-      (id) => this.todo.todos[id].selected === false
-    )
+    // при удалении выбранных задач, мы применяем метод мap к массиву mainTodos из которого формируются
+    // родительские задачи. Проверяем чему равен selected у каждого из элементов и оставляем только
+    // те элементы (id) у которых selected === false .
+    // но массив будет не чистый и будет сожержать элементы undefined .
+    // Чтобы от них избавиться мы применяем фильтр  filter((el) => el !== undefined)
 
-    // Для очистки todos , мы преобразовываем этот объект в массив при помощи Object.entries .
-    // После этого фильтруем его на основании значения value.selected === false .
-    // После чего преобразовываем его обратно в объект при помощи Object.fromEntries
+    this.todo.mainTodos = this.todo.mainTodos
+      .map((el) => {
+        if (this.todo.todos[el].selected === false) {
+          return el
+        }
+      })
+      .filter((el) => el !== undefined)
 
-    this.todo.todos = Object.fromEntries(
-      Object.entries(this.todo.todos).filter(
-        ([el, value]) => value.selected === false
-      )
-    )
+    console.log(this.todo.mainTodos)
+
+    // после формирования нового mainTodos (после удаления старых) из родительских ID, нужно создать новый массив, который будет
+    // включать в себя все дочерние id. После этого уже проходить ключами объекта именно по этому новому массиву,
+    // а не по mainTodos. Т.К. он не содержит дочерних id и в итоге все дочернии эл-ты удаляются.
+
+    // Мы создаем массив из массивов дочерних объектов пример: [[1,2],[3],[4]]
+    let childIds = this.todo.mainTodos.map((el) => findChildTodos(el))
+
+    // приводим childIds к однородному массиву. Было [[1,2],[3],[4]] стало [1,2,3,4]
+    let allChildIds = childIds.flat()
+
+    // Мы берем ключи (имена свойств) todos, делаем итерации и проверяем есть ли в массиве allChildIds эл = ключу
+    // Если есть, идем дальше. Если нет, удаляем его из объекта todos, который содердит список всех todo
+
+    for (const key in this.todo.todos) {
+      // if (Array.from(this.todo.mainTodos).includes(key)) {
+      if (allChildIds.includes(key)) {
+        console.log(' включает')
+      } else {
+        console.log(' нет')
+
+        delete this.todo.todos[key]
+      }
+    }
   }
 
   // при удалении всех задач, мы не только чистим массив из которого они формируются mainTodos,
