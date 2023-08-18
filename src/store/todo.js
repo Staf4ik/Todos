@@ -10,6 +10,7 @@ class TodoRed {
   todo = {
     todos: {},
     mainTodos: [],
+    selectedTodo: null,
   }
 
   constructor() {
@@ -33,6 +34,7 @@ class TodoRed {
       id: [id],
       text: [text],
       selected: false,
+      roll: true,
       parentId: 0,
     }
   }
@@ -44,15 +46,21 @@ class TodoRed {
       id: [id],
       text: [text],
       selected: false,
+      roll: true,
       parentId: [parId],
     }
   }
 
   // При клике на объект значение его свойства selected меняется на противоположное
   selectTodo(idSel, subTodo2) {
-    console.log(subTodo2)
+    // console.log(subTodo2)
     const oppositeState = !this.todo.todos[idSel].selected
     subTodo2.forEach((key) => (this.todo.todos[key].selected = oppositeState))
+  }
+
+  lookTodo(idSel) {
+    this.todo.selectedTodo = idSel
+    console.log(this.todo.selectedTodo)
   }
 
   delSelectedTodo() {
@@ -95,6 +103,15 @@ class TodoRed {
         delete this.todo.todos[key]
       }
     }
+
+    // Если главные задачи из mainTodos небыли выбраны, то делается проверка по значению свойства selected
+    // у всех задач в списке this.todo.todos и удаляются все задачи у кого selected true
+
+    this.todo.todos = Object.fromEntries(
+      Object.entries(this.todo.todos).filter(
+        ([el, value]) => value.selected === false
+      )
+    )
   }
 
   // при удалении всех задач, мы не только чистим массив из которого они формируются mainTodos,
@@ -103,6 +120,10 @@ class TodoRed {
     this.todo.mainTodos = []
 
     this.todo.todos = {}
+  }
+
+  rollTodos(idSel) {
+    this.todo.todos[idSel].roll = !this.todo.todos[idSel].roll
   }
 }
 

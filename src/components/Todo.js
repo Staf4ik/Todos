@@ -5,6 +5,11 @@ import TodoList from './TodoList'
 import findChildTodos from '../function/findChildTodos'
 
 import { AiOutlinePlus } from 'react-icons/ai'
+import { RiArrowDropRightLine } from 'react-icons/ri'
+import { RiArrowDropDownLine } from 'react-icons/ri'
+import { RiArrowRightSLine } from 'react-icons/ri'
+import { RiSearch2Line } from 'react-icons/ri'
+import { eventWrapper } from '@testing-library/user-event/dist/utils'
 
 const Todo = observer(({ prop, id }) => {
   // subTodo - это массив из которого формируются подзадачи.
@@ -27,6 +32,19 @@ const Todo = observer(({ prop, id }) => {
   //   })
   // }
 
+  //   const arrow = document.getElementById('test')
+
+  //   arrow.addEventListener('click', function () {
+  //     // Проверяем текущее содержимое div
+  //     if (arrow.innerHTML === ' > ') {
+  //       // Изменяем содержимое на " V "
+  //       arrow.innerHTML = ' V '
+  //     } else {
+  //       // Изменяем содержимое на " > "
+  //       arrow.innerHTML = ' > '
+  //     }
+  //   })
+
   const subTodo = Object.keys(TodoRed.todo.todos).filter((el) => {
     return Array.from(TodoRed.todo.todos[el].parentId)[0] === prop
   })
@@ -45,36 +63,79 @@ const Todo = observer(({ prop, id }) => {
             className={
               TodoRed.todo.todos[id].selected ? styles.todo_sel : styles.todo
             }
-            // onClick={() =>
-            //   console.log(
-            //     Object.keys(TodoRed.todo.todos).filter(
-            //       (el) =>
-            //         Array.from(TodoRed.todo.todos[el].parentId)[0] === prop
-            //     )
-            //   )
-            // }
             onClick={() => TodoRed.selectTodo(prop, subTodo2)}
             // onClick={() => findChildTodos(prop)}
           >
+            <div className={styles.ico}>
+              {/* при появлении вложенных задач, появляеится иконка стрелки ( > или v) */}
+              {subTodo.length > 0 ? (
+                <span>
+                  {TodoRed.todo.todos[id].roll ? (
+                    <RiArrowDropDownLine
+                      className={styles.todoIcon2}
+                      onClick={(event) => {
+                        event.stopPropagation()
+                        TodoRed.rollTodos(prop)
+                      }}
+                    />
+                  ) : (
+                    <RiArrowRightSLine
+                      className={styles.todoIcon2}
+                      onClick={(event) => {
+                        event.stopPropagation()
+                        TodoRed.rollTodos(prop)
+                      }}
+                    />
+                  )}{' '}
+                </span>
+              ) : (
+                true
+              )}
+
+              {/* {subTodo.length > 0 ? (
+                <RiArrowRightSLine
+                  className={styles.todoIcon}
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    TodoRed.rollTodos(prop)
+                  }}
+                />
+              ) : (
+                true
+              )} */}
+            </div>
             <div>
-              <p>{TodoRed.todo.todos[prop].text}</p>
+              <p className={styles.text_todo}>
+                {TodoRed.todo.todos[prop].text}
+              </p>
+
               {/* отображение id задачи  */}
-              <span>id: {id}</span>
+              {/* <span>id: {id}</span> */}
+
               {/* отображение parentid задачи для проверки  */}
-              <span>
+              {/* <span>
                 parent ID :
                 {TodoRed.todo.todos[prop].parentId === 0
                   ? 'null'
                   : TodoRed.todo.todos[prop].parentId}
-              </span>
+              </span> */}
+
               {/* тест на отображение изменения состояния selected  */}
               {/* пока selected = false отображается 1 при true 2  */}
               {/* <p> {TodoRed.todo.todos[id].selected ? 2 : 1}</p> */}
             </div>
-
+            <div>
+              <RiSearch2Line
+                className={styles.todoIcon3}
+                onClick={(event) => {
+                  event.stopPropagation()
+                  TodoRed.lookTodo(prop)
+                }}
+              />
+            </div>
             <div>
               <AiOutlinePlus
-                className={styles.todoIcon}
+                className={styles.todoIcon3}
                 onClick={(event) => {
                   event.stopPropagation()
                   const id = new Date().getTime().toString()
@@ -85,12 +146,13 @@ const Todo = observer(({ prop, id }) => {
               />
             </div>
           </div>
-          <div>
+          {/* <div>
             <input type="checkbox" className={styles.inputTodo}></input>
-          </div>
+          </div> */}
         </div>
-
-        <TodoList todoIds={subTodo} />
+        {/* <div id="test"> V </div> */}
+        {TodoRed.todo.todos[id].roll ? <TodoList todoIds={subTodo} /> : true}
+        {/* <TodoList todoIds={subTodo} /> */}
       </div>
     </>
   )

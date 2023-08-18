@@ -16,7 +16,7 @@ const findChildTodos = (currentId) => {
   // })
   result.concat(x)
 
-  console.log(result)
+  // console.log(result)
 
   for (let index = 0; index < result.length; ++index) {
     const y = Object.keys(TodoRed.todo.todos).filter((el) => {

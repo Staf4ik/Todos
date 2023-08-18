@@ -1,9 +1,8 @@
 .display {
     display: flex;
-    /* justify-content: center; */
     margin: 0px auto;
     width: 500px;
-    align-items: center;
+    align-items: left;
 
 } 
 
@@ -11,47 +10,70 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px auto;
+
+    margin: 3px auto;
     padding: 10px;
-    /* border: 1px solid #d7b5b5 ; */
+    border: 1px solid #d7b5b5 ;
     border-radius: 10px;
     background-color: #f3e4e4;
     width: 400px;
-    box-shadow: 5px 5px 10px black;
+    height: 50px;
+    box-shadow: 5px 5px 8px black;
     
 }
 
 .todo:hover {
-    border: 1px solid yellow;
-    /* background-color: white; */
-    /* outline-color: black; */
+    /* box-shadow: 5px 5px 10px white; */
+    box-shadow: 5px 5px 15px black;
 }
 
 .todo_sel {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px auto;
+    margin: 3px auto;
     padding: 10px;
     border: 1px solid #4e524d ;
     border-radius: 10px;
     background-color: #4e524d;
     width: 400px;
-    box-shadow: 5px 5px 10px black;
+    height: 50px;
+    box-shadow: 5px 5px 8px black;
     color: #fff;
     
     
 }
 
 .todo_sel:hover {
-    border: 1px solid yellow;
-    /* background-color: white; */
-    /* color: black; */
-    /* outline-color: black; */
+    box-shadow: 5px 5px 15px black;
 }
 
 .todoIcon {
     font-size: 2rem;
+    width: 60px;
+
+}
+
+.todoIcon2 {
+    font-size: 50px;
+    width: 60px;
+}
+
+.todoIcon3 {
+    font-size: 2rem;
+
+
+}
+
+
+.text_todo {
+    width: 215px;
+    /* height: 50px; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+
 }
 
 .subTodoSecond {
@@ -64,7 +86,7 @@
 }
 
 span {
-    margin-left: 20px;
+    /* margin-left: 20px; */
 }
 
 .inputTodo {
